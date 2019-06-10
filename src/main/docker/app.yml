@@ -1,0 +1,16 @@
+version: '2'
+services:
+  propertyupdate-app:
+    image: propertyupdate
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://propertyupdate-postgresql:5432/propertyUpdate
+      - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+    ports:
+      - 8080:8080
+  propertyupdate-postgresql:
+    extends:
+      file: postgresql.yml
+      service: propertyupdate-postgresql
